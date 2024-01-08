@@ -36,6 +36,7 @@
     <style>.github-fork-ribbon:before { background-color: #ea1e69; }</style>
     <!-- Serviceworker script that adds the COI and CORS headers to the response headers in cases where the server does not support it. -->
     <script src="serviceWorker.js"></script>
+    <script src="enable-threads.js"></script>
     <script src="./xterm/xterm.js"></script>
     <script src="./xterm/xterm-addon-fit.js"></script>
     <script src="network.js"></script>
@@ -43,7 +44,6 @@
   </head>
 
   <body style="margin:0;height:100%;background:black;color:white;overflow:hidden; display:flex; flex-direction: column; justify-content: space-between; height: 100%;">
-    <a class="github-fork-ribbon right-bottom" href="https://github.com/leaningtech/webvm/" target="_blank" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
     <div>
       <div style="padding-top: 0.7em;padding-bottom: 0.7em;font-size: 0.3em; font-weight: 200;vertical-align:center;height: 120px;">
         <div style="margin-left: 20px; height: 100%; display: flex; align-items: center; justify-content: space-between;">
