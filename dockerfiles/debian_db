@@ -4,14 +4,13 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get clean && apt-get update && apt-get -y upgrade &&\
     apt-get -y install apt-utils  \
     vim unzip  \
-	fakeroot dbus base whiptail hexedit \
+	fakeroot dbus base whiptail \
 	patch wamerican ucf  curl  \
-	file  make lua50 dialog  \
+	file  make  dialog  \
 	less cowsay netcat-openbsd \
-    redis-server sqlite3
+    sqlite3 golang-go 
 
-RUN useradd -m user && echo "user:password" | chpasswd &&\
-    sed -i '/^supervised /s/.*$/ supervised yes/'  /etc/redis/redis.conf
+RUN useradd -m user && echo "user:password" | chpasswd 
 COPY --chown=user:user ./examples /home/user/examples
 # We set WORKDIR, as this gets extracted by Webvm to be used as the cwd. This is optional.
 WORKDIR /home/user/
