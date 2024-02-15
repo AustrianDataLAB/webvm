@@ -1,4 +1,4 @@
-FROM --platform=i386 i386/debian:buster
+FROM --platform=i386 i386/golang:bullseye
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get clean && apt-get update && apt-get -y upgrade &&\
@@ -8,7 +8,7 @@ RUN apt-get clean && apt-get update && apt-get -y upgrade &&\
 	patch wamerican ucf  curl  \
 	file  make  dialog  \
 	less cowsay netcat-openbsd \
-    sqlite3 golang-go 
+    sqlite3  
 
 RUN useradd -m user && echo "user:password" | chpasswd 
 COPY --chown=user:user ./examples /home/user/examples
