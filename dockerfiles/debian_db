@@ -8,7 +8,7 @@ RUN apt-get clean && apt-get update && apt-get -y upgrade &&\
 	patch wamerican ucf  curl  \
 	file  make lua50 dialog  \
 	less cowsay netcat-openbsd \
-    redis-server sqlite3
+    sqlite3
 
 RUN useradd -m user && echo "user:password" | chpasswd &&\
     sed -i '/^supervised /s/.*$/ supervised yes/'  /etc/redis/redis.conf
