@@ -21,13 +21,13 @@ RUN curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.
 
 RUN curl -LO https://golang.org/dl/go1.23.3.linux-386.tar.gz && \
     tar -C /usr/local -xzf go1.23.3.linux-386.tar.gz && \
-    rm go1.23.3.linux-386.tar.gz && \
-	go install sigs.k8s.io/kind@v0.25.0
+    rm go1.23.3.linux-386.tar.gz 
 
 # Set up Go environment variables
 ENV PATH="/usr/local/go/bin:${PATH}"
 ENV GOPATH="/home/user/go"
 ENV PATH="${GOPATH}/bin:${PATH}"
+RUN go install sigs.k8s.io/kind@v0.25.0
 
 RUN useradd -m user && echo "user:password" | chpasswd && usermod -aG docker user
 # Ensure Docker can be run as a non-root user
