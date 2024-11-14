@@ -1,12 +1,12 @@
 FROM --platform=i386 i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get clean && apt-get update && apt-get -y upgrade
-RUN apt-get -y install apt-utils gcc \
+RUN apt-get -y install apt-utils  \
     vim unzip   \
 	fakeroot dbus base whiptail hexedit \
 	patch wamerican ucf manpages \
 	file luajit make lua50 dialog curl \
-	less cowsay netcat-openbsd\
+	less  netcat-openbsd\
     apt-transport-https \
     ca-certificates \
     curl \
@@ -16,8 +16,7 @@ RUN apt-get -y install apt-utils gcc \
 
 # Download and install Docker static binaries
 RUN curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.3.1.tgz | tar -xz -C /usr/local/bin --strip-components=1 docker/docker && \
-	chmod +x /usr/local/bin/docker && \
-	rm docker-27.3.1.tgz
+	chmod +x /usr/local/bin/docker 
 
 # Download and install Go
 
