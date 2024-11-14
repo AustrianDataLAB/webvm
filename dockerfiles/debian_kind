@@ -11,10 +11,11 @@ RUN apt-get -y install apt-utils gcc \
     ca-certificates \
     curl \
     gnupg2 \
-    software-properties-common 
+    software-properties-common && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Download and install Docker static binaries
-RUN curl -fsSL https://download.docker.com/linux/static/stable/i386/docker-20.10.7.tgz | tar -xz -C /usr/local/bin --strip-components=1 docker/docker
+RUN curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.3.1.tgz | tar -xz -C /usr/local/bin --strip-components=1 docker/docker
 
 # Download and install Go
 ENV GO_VERSION=1.21.3
@@ -28,7 +29,9 @@ ENV PATH="/usr/local/go/bin:${PATH}"
 ENV GOPATH="/home/user/go"
 ENV PATH="${GOPATH}/bin:${PATH}"
 
-RUN useradd -m user && echo "user:password" | chpasswd
+RUN useradd -m user && echo "user:password" | chpasswd && usermod -aG docker user
+# Ensure Docker can be run as a non-root user
+RUN groupadd docker && usermod -aG docker user
 COPY --chown=user:user ./examples /home/user/examples
 RUN chmod -R +x  /home/user/examples/lua
 # We set WORKDIR, as this gets extracted by Webvm to be used as the cwd. This is optional.
