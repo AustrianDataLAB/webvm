@@ -29,7 +29,8 @@ ENV GOPATH="/home/user/go"
 ENV PATH="${GOPATH}/bin:${PATH}"
 RUN go install sigs.k8s.io/kind@v0.25.0
 
-RUN useradd -m user && echo "user:password" | chpasswd && usermod -aG docker user
+RUN useradd -m user && echo "user:password" | chpasswd && \
+	usermod -aG sudo user
 # Ensure Docker can be run as a non-root user
 RUN groupadd docker && usermod -aG docker user
 COPY --chown=user:user ./examples /home/user/examples
