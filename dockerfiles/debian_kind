@@ -11,12 +11,10 @@ RUN apt-get -y install apt-utils gcc \
     ca-certificates \
     curl \
     gnupg2 \
-    software-properties-common && \
-    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
-    add-apt-repository "deb [arch=i386] https://download.docker.com/linux/debian $(lsb_release -cs) stable" && \
-    apt-get update && \
-    apt-get install -y docker-ce docker-ce-cli containerd.io
+    software-properties-common 
 
+# Download and install Docker static binaries
+RUN curl -fsSL https://download.docker.com/linux/static/stable/i386/docker-20.10.7.tgz | tar -xz -C /usr/local/bin --strip-components=1 docker/docker
 
 # Download and install Go
 ENV GO_VERSION=1.21.3
