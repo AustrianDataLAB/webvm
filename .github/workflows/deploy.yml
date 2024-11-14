@@ -42,6 +42,7 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }} # As required by the GitHub-CLI  
 
+
       permissions:
         actions: 'write' # Required in order to terminate the workflow run.
   
@@ -157,6 +158,10 @@ jobs:
          sudo mkfs.ext2 -r 0 ${IMAGE_NAME}
          # Mount the ext2 image to modify it
          sudo mount -o loop -t ext2 ${IMAGE_NAME} /mnt/
+  
+      - name: Check disk space
+        run: |
+          df -h /mnt
 
       # We opt for 'docker cp --archive' over 'docker save' since our focus is solely on the end product rather than individual layers and metadata.
       # However, it's important to note that despite being specified in the documentation, the '--archive' flag does not currently preserve uid/gid information when copying files from the container to the host machine.
